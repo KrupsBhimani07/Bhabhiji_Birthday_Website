@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday, {{ memories.name }}!</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Background Decorations -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-logo">💗 Birthday Wishes</div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#letter">Birthday Letter</a>
+            <a href="#bonding">Our Bonding Memories</a>
+        </div>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section class="hero-section" id="home">
+
+        <div class="hero-content">
+
+            <p class="hero-small-text">
+                A special day for a special person
+            </p>
+
+            <h1>
+                Happy Birthday,
+                <span>{{ memories.name }}!</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                {{ memories.birthday_subtitle }}
+            </p>
+
+            <!-- Main Birthday Photo -->
+            <div class="hero-photo-frame">
+                <div class="hero-photo-decoration">✨ 💖 ✨</div>
+
+                <img
+                    src="{{ url_for('static', filename=memories.hero_photo) }}"
+                    alt="Birthday special photo"
+                    class="hero-photo"
+                >
+
+                <div class="hero-photo-caption">
+                    A Beautiful Birthday 🎂💖
+                </div>
+            </div>
+
+            <button class="primary-btn" onclick="scrollToMemories()">
+                Explore Our Memories 💕
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- BIRTHDAY WISHES -->
+    <section class="wishes-section">
+
+        <div class="section-heading">
+            <p class="section-small-title">Made With Love</p>
+
+            <h2>Birthday Wishes 💝</h2>
+
+            <p>
+                Some people make our lives more beautiful just by being in them.
+            </p>
+        </div>
+
+        <div class="wishes-grid">
+
+            <div class="wish-card">
+                <div class="wish-icon">🌸</div>
+
+                <h3>Stay Happy</h3>
+
+                <p>
+                    May your smile always shine and your heart always stay happy.
+                </p>
+            </div>
+
+            <div class="wish-card">
+                <div class="wish-icon">💖</div>
+
+                <h3>Stay Blessed</h3>
+
+                <p>
+                    May your life be filled with love, blessings, and beautiful moments.
+                </p>
+            </div>
+
+            <div class="wish-card">
+                <div class="wish-icon">🎂</div>
+
+                <h3>Keep Shining</h3>
+
+                <p>
+                    You deserve all the happiness and success in the world.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LETTER SECTION -->
+    <section class="letter-section" id="letter">
+
+        <div class="section-heading">
+            <p class="section-small-title">A Message From My Heart</p>
+
+            <h2>A Special Birthday Letter 💌</h2>
+
+            <p>
+                A little message filled with love and emotions.
+            </p>
+        </div>
+
+        <div class="letter-container">
+
+            <div class="letter-envelope" id="letterEnvelope">
+
+                <div class="envelope-front">
+                    <div class="envelope-heart">💌</div>
+
+                    <h3>A Letter For You</h3>
+
+                    <p>Click to open your special letter</p>
+
+                    <button class="letter-open-btn" id="openLetter">
+                        Open Letter 💗
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="letter-paper" id="letterPaper">
+
+                <button class="letter-close-btn" id="closeLetter">
+                    ✕
+                </button>
+
+                <div class="letter-paper-content">
+
+                    <div class="letter-decoration">🌷 💖 🌷</div>
+
+                    <h2>{{ memories.letter.title }}</h2>
+
+                    <p class="letter-greeting">
+                        {{ memories.letter.greeting }}
+                    </p>
+
+                    <p class="letter-message">
+                        {{ memories.letter.message }}
+                    </p>
+
+                    <div class="letter-closing">
+
+                        <p>
+                            {{ memories.letter.closing }}
+                        </p>
+
+                        <h3>
+                            {{ memories.letter.signature }}
+                        </h3>
+
+                        <div class="letter-hearts">
+                            💖 💗 💕
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- OUR BONDING MEMORIES -->
+    <section class="bonding-section" id="bonding">
+
+        <div class="bonding-heading">
+
+            <div class="bonding-badge">
+                ✨ Our Special Bond ✨
+            </div>
+
+            <h2>
+                Our <span>Bonding Memories</span> 💞
+            </h2>
+
+            <p>
+                Five beautiful moments, countless emotions, and a bond
+                that will always stay special.
+            </p>
+
+            <div class="bonding-decoration">
+                ♡ ───────── 💗 ───────── ♡
+            </div>
+
+        </div>
+
+        <!-- Memory Slideshow -->
+        <div class="memory-slideshow">
+
+            <button class="slide-arrow prev-slide"
+                    id="prevSlide"
+                    aria-label="Previous photo">
+                ❮
+            </button>
+
+            <div class="memory-slide-container">
+
+                {% for memory in memories.memories %}
+
+                <div class="memory-slide {% if loop.first %}active{% endif %}"
+                     data-index="{{ loop.index0 }}">
+
+                    <div class="memory-photo-frame">
+
+                        <img
+                            src="{{ url_for('static', filename=memory.image) }}"
+                            alt="{{ memory.title }}"
+                            class="memory-photo"
+                            onclick="openMemoryLightbox({{ loop.index0 }})"
+                        >
+
+                        <div class="memory-photo-heart">
+                            💖
+                        </div>
+
+                    </div>
+
+                    <div class="memory-caption">
+
+                        <span class="memory-number">
+                            Memory {{ loop.index }} / 5
+                        </span>
+
+                        <h3>{{ memory.title }}</h3>
+
+                        <p>{{ memory.text }}</p>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <button class="slide-arrow next-slide"
+                    id="nextSlide"
+                    aria-label="Next photo">
+                ❯
+            </button>
+
+        </div>
+
+        <!-- Slideshow Dots -->
+        <div class="slideshow-dots" id="slideshowDots">
+
+            {% for memory in memories.memories %}
+
+            <button class="slide-dot {% if loop.first %}active{% endif %}"
+                    data-index="{{ loop.index0 }}"
+                    aria-label="Show memory {{ loop.index }}">
+            </button>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="slideshow-controls">
+
+            <button class="slideshow-play-btn" id="playSlideshow">
+                ▶ Play Slideshow
+            </button>
+
+            <button class="slideshow-pause-btn" id="pauseSlideshow">
+                ⏸ Pause
+            </button>
+
+        </div>
+
+        <div class="bonding-footer">
+            <p>
+                Every memory is a little piece of our beautiful bond. 💗
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- CAKE SECTION -->
+    <section class="cake-section" id="cake">
+
+        <div class="section-heading">
+
+            <p class="section-small-title">
+                Make A Wish
+            </p>
+
+            <h2>
+                Your Birthday Cake 🎂
+            </h2>
+
+            <p>
+                Close your eyes, make a wish, and blow out the candles!
+            </p>
+
+        </div>
+
+        <div class="cake-container">
+
+            <div class="cake">
+
+                <div class="cake-candles">
+
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+
+                </div>
+
+                <div class="cake-top"></div>
+
+                <div class="cake-middle"></div>
+
+                <div class="cake-bottom"></div>
+
+            </div>
+
+        </div>
+
+        <button class="primary-btn" id="blowCandles">
+            Blow Candles 🎉
+        </button>
+
+        <button class="secondary-btn" id="relightCandles">
+            Light Candles Again 🕯️
+        </button>
+
+        <div id="birthdayMessage" class="birthday-message">
+            Your wishes deserve to come true! 💖
+        </div>
+
+    </section>
+
+
+    <!-- BIRTHDAY MUSIC -->
+    <section class="music-section" id="music">
+
+        <div class="music-card">
+
+            <div class="music-icon">
+                🎵
+            </div>
+
+            <h2>Birthday Melody</h2>
+
+            <p>
+                A little birthday tune made specially for you.
+            </p>
+
+            <audio
+                id="birthdayMusic"
+                src="{{ url_for('static', filename='music/birthday-melody.wav') }}"
+                loop>
+            </audio>
+
+            <div class="music-controls">
+
+                <button class="music-play-btn" id="playMusic">
+                    ▶ Play Music
+                </button>
+
+                <button class="music-pause-btn" id="pauseMusic">
+                    ⏸ Pause Music
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QR SECTION -->
+    <section class="qr-section">
+
+        <div class="section-heading">
+
+            <p class="section-small-title">
+                Share The Birthday Love
+            </p>
+
+            <h2>
+                Birthday Website QR 💝
+            </h2>
+
+            <p>
+                Scan the QR code to open this birthday website.
+            </p>
+
+        </div>
+
+        <div class="qr-card">
+
+            <img
+                src="{{ url_for('generate_qr') }}"
+                alt="Birthday Website QR Code"
+                class="qr-image"
+            >
+
+            <p>
+                Scan and celebrate!
+            </p>
+
+            <a
+                href="{{ url_for('generate_qr') }}"
+                download="birthday-website-qr.png"
+                class="secondary-btn">
+                Download QR Code
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-hearts">
+            💗 💖 💕
+        </div>
+
+        <h3>
+            Made With Lots Of Love
+        </h3>
+
+        <p>
+            Happy Birthday, {{ memories.name }}!
+        </p>
+
+        <p class="footer-small">
+            A beautiful bond deserves beautiful memories.
+        </p>
+
+    </footer>
+
+
+    <!-- MEMORY LIGHTBOX -->
+    <div class="memory-lightbox" id="memoryLightbox">
+
+        <button class="lightbox-close" id="closeLightbox">
+            ✕
+        </button>
+
+        <button class="lightbox-arrow lightbox-prev" id="lightboxPrev">
+            ❮
+        </button>
+
+        <div class="lightbox-content">
+
+            <img
+                src=""
+                alt="Selected memory"
+                id="lightboxImage"
+            >
+
+            <h3 id="lightboxTitle"></h3>
+
+            <p id="lightboxText"></p>
+
+        </div>
+
+        <button class="lightbox-arrow lightbox-next" id="lightboxNext">
+            ❯
+        </button>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>

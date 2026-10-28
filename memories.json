@@ -1,0 +1,41 @@
+
+{
+  "name": "Bhabhiji",
+  "birthday_title": "Happy Birthday, Bhabhiji!",
+  "birthday_subtitle": "A beautiful soul deserves the most beautiful day",
+  "hero_photo": "photos/hero.jpg",
+  "letter": {
+    "title": "A Letter From My Heart",
+    "greeting": "Dear Bhabhiji,",
+    "message": "You are not just my Bhabhiji, you are a beautiful part of our family and my life. Your love, care, smile, and blessings make every moment special. I feel lucky to have you in my life. May your birthday bring endless happiness, love, laughter, and beautiful memories. Keep smiling always!",
+    "closing": "With lots of love,",
+    "signature": "Your Devarji, Your Brother"
+  },
+  "memories": [
+    {
+      "image": "photos/memory1.jpg",
+      "title": "A Travel Partner",
+      "text": "Some journeys become special because of the person beside you. As a sister and a bhabhi, you made every trip lighter, happier and full of beautiful memories."
+    },
+    {
+      "image": "photos/memory2.jpg",
+      "title": "A Rakshabandhan",
+      "text": "You are not just my bhabhi, you are the sister I always wished for. Every Rakshabandhan with you is filled with love, laughter and a bond that never fades."
+    },
+    {
+      "image": "photos/memory3.jpg",
+      "title": "Strength Combo",
+      "text": "When Navratri comes, devar and bhabhiji hit the garba floor with full strength. No tiredness, only energy, joy and endless dancing - truly an unbeatable combo!"
+    },
+    {
+      "image": "photos/memory4.jpg",
+      "title": "A Memory to Remember",
+      "text": "Some memories stay in our hearts forever, no matter how much time passes."
+    },
+    {
+      "image": "photos/memory5.jpg",
+      "title": "Forever Our Bonding",
+      "text": "Wishing for many more beautiful memories, happy moments, and smiles together."
+    }
+  ]
+}
